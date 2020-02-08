@@ -31,9 +31,11 @@ final class XMLTVTests: XCTestCase {
     
     func testChannel() {
         let data = xmltvExample.data(using: .utf8)!
-        let xmltv = XMLTV(data: data)
+        let xmltv = try? XMLTV(data: data)
         
-        let channels = xmltv.getChannels()
+        XCTAssertNotNil(xmltv)
+        
+        let channels = xmltv!.getChannels()
         XCTAssert(channels.count == 1)
         
         let channel = channels[0]
@@ -45,10 +47,12 @@ final class XMLTVTests: XCTestCase {
     
     func testProgram() {
         let data = xmltvExample.data(using: .utf8)!
-        let xmltv = XMLTV(data: data)
+        let xmltv = try? XMLTV(data: data)
         
-        let channel = xmltv.getChannels()[0]
-        let programs = xmltv.getPrograms(channel: channel)
+        XCTAssertNotNil(xmltv)
+        
+        let channel = xmltv!.getChannels()[0]
+        let programs = xmltv!.getPrograms(channel: channel)
         XCTAssert(programs.count == 1)
         
         let program = programs[0]

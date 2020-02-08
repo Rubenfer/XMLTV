@@ -11,8 +11,8 @@ public class XMLTV {
     
     private let xml: XML
     
-    public init(data: Data) {
-        self.xml = XML(data: data)
+    public init(data: Data) throws {
+        self.xml = try XML(data: data)
     }
     
     public func getChannels() -> [TVChannel] {
